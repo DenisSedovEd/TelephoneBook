@@ -12,6 +12,7 @@ def commands():
         '6': 'Ничего, я передумал, пока:)'
     }
     print('Приветствую тебя в телефонном справочнике, что ты хотел сделать?')
+    print('_ '*30)
     for key, value in command_list.items():
         print(f'{key} - {value}')
     print('Веди номер команды, которую ты хотел сделать:')
@@ -49,7 +50,7 @@ def search_contact():
                 print(f'\t{key:<12} - {value}')
             return None
         for key, value in contact.items():
-            if search_param == value:
+            if search_param.lower() == value.lower():
                 for keys, values in data[idx].items():
                     print(f'\t{keys:<12} - {values}')
                 return None
@@ -60,6 +61,11 @@ def add_contact():
     data = open_file()
     name = input('Имя: ')
     phone_number = input('Номер телефона: ')
+    if not phone_number.isdigit():
+        phone_number = input('Номер телефона не может содержать буквы или специальные символы. Введите еще раз.\n')
+        if not phone_number.isdigit():
+            print('Некорректно введен номер телефона.')
+            return None
     comment = input('Комментарий: ')
     key = []
     for el in data:
@@ -73,7 +79,7 @@ def add_contact():
     print(f'Добавить контакт {name}?')
     answer = input('y/n?')
 
-    if answer.lower() == 'y':
+    if answer.lower() == 'y' or answer.lower() == 'н':
         edit_file(data)
     else:
         return None
@@ -101,7 +107,7 @@ def edit_contact():
     print(f'Измеить контакт {data[edit_index]['Имя']}?')
     answer = input('y/n?')
 
-    if answer.lower() == 'y':
+    if answer.lower() == 'y' or answer.lower() == 'н':
         edit_file(data)
     else:
         return None
@@ -113,7 +119,7 @@ def delete_contact():
     del_index = input('Введите ID контакта, который необходимо удалить: ')
     print(f'Удалить указанный контакт?')
     answer = input('y/n?')
-    if answer.lower() == 'y':
+    if answer.lower() == 'y' or answer.lower() == 'н':
         data.pop(del_index)
         edit_file(data)
 
@@ -121,6 +127,7 @@ def delete_contact():
 def input_command():
     command = input()
     if command == '1':
+        os.system('cls')
         view_all()
     elif command == '2':
         data = search_contact()
