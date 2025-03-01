@@ -110,13 +110,14 @@ def edit_contact():
     if name == '':
         name = data[edit_index]['Имя']
     phone_number = input('Номер телефона: ')
+
+    if phone_number == '':
+        phone_number = data[edit_index]['Телефон']
     if not phone_number.isdigit():
         phone_number = input('Номер телефона не может содержать буквы или специальные символы. Введите еще раз.\n')
         if not phone_number.isdigit():
             print('Некорректно введен номер телефона.')
             return None
-    if phone_number == '':
-        phone_number = data[edit_index]['Телефон']
     comment = input('Комментарий: ')
     if comment == '':
         comment = data[edit_index]['Комментарий']
