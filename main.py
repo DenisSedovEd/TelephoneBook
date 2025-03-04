@@ -1,6 +1,32 @@
 import os
 import json
 
+class Contact:
+
+    def __init__(self, name, phone_number, comment):
+        self.name = name
+        self.phone_number = phone_number
+        self.comment = comment
+
+    def __str__(self):
+        return str(f'Контакт {self.name}, его номер {self.phone_number}. Комментарий: {self.comment}')
+
+    def add(self):
+        pass
+
+    def edit(self):
+        pass
+
+    def remove(self):
+        pass
+
+    def show(self):
+        '''
+
+        :return:
+        '''
+        pass
+
 
 def show_contacts(data):
     '''
@@ -33,6 +59,11 @@ def edit_file(data):
     '''
     with open('data_base.json', 'w', encoding='utf-8') as file:
         json.dump(data, file, ensure_ascii=False, indent=4)
+
+class Storage:
+    def __init__(self):
+        pass
+
 
 
 def view_all():
